@@ -1,3 +1,5 @@
+// For testing stuff, not actual code!
+
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Button, Alert} from 'react-native';
 import {
@@ -6,25 +8,8 @@ import {
   useCameraDevice,
   useCodeScanner,
 } from 'react-native-vision-camera';
-
-function PermissionsPage({requestPermission}) {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>
-        Camera permission is required to use this feature.
-      </Text>
-      <Button title="Grant Permission" onPress={requestPermission} />
-    </View>
-  );
-}
-
-function NoCameraDeviceError() {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.text}>No camera device found.</Text>
-    </View>
-  );
-}
+import {NoPermissionsScreen} from './PermissonScreen';
+import {NoCameraDeviceErrorScreen} from './NoCameraScreen';
 
 function CameraScreen() {
   const device = useCameraDevice('back');
@@ -33,9 +18,6 @@ function CameraScreen() {
     codeTypes: ['qr', 'ean-13'],
     onCodeScanned: codes => {
       setIsAcitve(false);
-      // console.log(`Scanned ${codes.length} codes!`);
-      console.log(codes);
-      console.log('codes', codes[0]);
       Alert.alert('Value of qr code', codes[0].value, [
         {
           text: 'Ok',
@@ -43,6 +25,7 @@ function CameraScreen() {
         },
       ]);
     },
+    regionOfInterest: {x: 100, y: 200, width: 20, height: 20}, // works only on IOS, has to be done manually on android
   });
 
   const {hasPermission, requestPermission} = useCameraPermission();
@@ -54,18 +37,18 @@ function CameraScreen() {
   }, [hasPermission, requestPermission]);
 
   if (!hasPermission) {
-    return <PermissionsPage requestPermission={requestPermission} />;
+    return <NoPermissionsScreen requestPermission={requestPermission} />;
   }
 
   if (device == null) {
-    return <NoCameraDeviceError />;
+    return <NoCameraDeviceErrorScreen />;
   }
 
   return (
     <View style={styles.container}>
-      <Text style={styles.overlayText}>Some text</Text>
+      {/* <Text style={styles.overlayText}>Some text</Text> */}
       <Camera
-        style={StyleSheet.absoluteFill}
+        style={styles.camera_size}
         device={device}
         isActive={isActive}
         codeScanner={codeScanner}
@@ -75,6 +58,10 @@ function CameraScreen() {
 }
 
 const styles = StyleSheet.create({
+  camera_size: {
+    width: '90%',
+    height: '90%',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
