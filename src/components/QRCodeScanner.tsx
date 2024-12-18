@@ -28,14 +28,12 @@ export const QRCodeScanner: React.FC<QRCodeScannerProps> = ({
     );
   }
   return (
-    <View style={{flex: 1, width: '100%'}}>
-      <Camera
-        device={device}
-        isActive={isActive}
-        style={style}
-        torch={flashStatus ? 'on' : 'off'}
-        codeScanner={codeScanner}
-      />
-    </View>
+    <Camera
+      device={device}
+      isActive={isActive}
+      style={style}
+      torch={flashStatus ? 'on' : 'off'}
+      codeScanner={codeScanner}
+    />
   );
 };

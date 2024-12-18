@@ -10,11 +10,13 @@ export const useStyles = (isDarkTheme: boolean = false) => {
       flex: 1,
       width: '100%',
       height: '100%',
+      backgroundColor: 'blue',
+      padding: 20,
     },
     container: {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+      backgroundColor: 'red',
+      height: '100%',
     },
     center_header: {
       textAlign: 'center',

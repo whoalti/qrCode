@@ -59,6 +59,7 @@ export const ScanScreen = () => {
     return <NoCameraDeviceErrorScreen />;
   }
 
+  // callback
   const toggleFlashLight = () => {
     setFlashLight(prev => !prev);
   };

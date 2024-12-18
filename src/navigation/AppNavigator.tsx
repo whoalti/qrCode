@@ -1,15 +1,12 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {ScanScreen} from '../screens/ScanScreen/ScanScreen';
-import {CreateScreen} from '../screens/CreateScreen/CreateScreen';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
-import CameraScreen from '../screens/CameraScreen/CameraScreen';
 import {CreateTabIcon} from '../assets/icons/TabIcons/CreateTabIcon';
 import {ScanTabIcon} from '../assets/icons/TabIcons/ScanTabIcon';
-import {useStyles} from '../screens/CreateScreen/styles';
-import {useTheme} from '../theme/useTheme';
 import {useThemeMode} from '../context/ThemeContext';
-
+import {CreateScreen} from '../screens/CreateScreen/CreateScreen';
+import {ScanScreen} from '../screens/ScanScreen/ScanScreen';
+import {useTheme} from '../theme/useTheme';
+// alt shift o
 const Tab = createBottomTabNavigator();
 
 export const MyTabs = () => {
@@ -17,6 +14,7 @@ export const MyTabs = () => {
   const {isDarkMode} = useThemeMode();
 
   return (
+    //
     <Tab.Navigator
       initialRouteName="Scan"
       screenOptions={{
@@ -25,6 +23,7 @@ export const MyTabs = () => {
             ? Colors.background.secondary_dark
             : Colors.background.light,
         },
+        headerShown: false,
         headerTintColor: isDarkMode ? Colors.text.dark : Colors.text.primary,
         headerTitleStyle: {},
         tabBarStyle: {
