@@ -6,49 +6,28 @@ import {useThemeMode} from '../context/ThemeContext';
 import {CreateScreen} from '../screens/CreateScreen/CreateScreen';
 import {ScanScreen} from '../screens/ScanScreen/ScanScreen';
 import {useTheme} from '../theme/useTheme';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {NavigationContainer} from '@react-navigation/native';
+import {MyTabs} from './MyTabs';
+import {DeepLinkScreen} from '../screens/DeepLinkScreen/DeepLinkScreen';
 // alt shift o
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
-export const MyTabs = () => {
-  const {Colors} = useTheme();
-  const {isDarkMode} = useThemeMode();
+const linking = {
+  prefixes: ['mychat://', 'https://mychat.com'],
+  config: {
+    screens: {DeepLink: 'home/:text'},
+  },
+};
 
+export const MyStack = () => {
   return (
-    //
-    <Tab.Navigator
-      initialRouteName="Scan"
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: isDarkMode
-            ? Colors.background.secondary_dark
-            : Colors.background.light,
-        },
-        headerShown: false,
-        headerTintColor: isDarkMode ? Colors.text.dark : Colors.text.primary,
-        headerTitleStyle: {},
-        tabBarStyle: {
-          backgroundColor: isDarkMode
-            ? Colors.background.secondary_dark
-            : Colors.background.light,
-        },
-      }}>
-      <Tab.Screen
-        name="Scan"
-        component={ScanScreen}
-        options={{
-          tabBarLabel: 'Scan',
-          tabBarIcon: ScanTabIcon,
-        }}
-      />
-      <Tab.Screen
-        name="Create"
-        component={CreateScreen}
-        options={{
-          tabBarLabel: 'Create',
-          tabBarIcon: CreateTabIcon,
-        }}
-      />
-      {/* <Tab.Screen name="Camera" component={CameraScreen} /> */}
-    </Tab.Navigator>
+    <NavigationContainer linking={linking}>
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Tabs" component={MyTabs} />
+        <Stack.Screen name="DeepLink" component={DeepLinkScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
