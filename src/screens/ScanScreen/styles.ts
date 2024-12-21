@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
-import {useTheme} from '../../theme/useTheme';
-import {rem} from '../../theme/rn-units';
+import {useTheme} from '@theme/useTheme';
+import {rem} from '@theme/rn-units';
 
 export const useStyles = (isDarkTheme: boolean = false) => {
   const {Colors} = useTheme();

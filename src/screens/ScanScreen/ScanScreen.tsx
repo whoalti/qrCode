@@ -1,19 +1,19 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {SafeAreaView, View, Text, Alert, TouchableOpacity} from 'react-native';
-import {useThemeMode} from '../../context/ThemeContext';
+import {useThemeMode} from '@context/ThemeContext';
 import {useStyles} from './styles';
 import {
   useCameraDevice,
   useCameraPermission,
   useCodeScanner,
 } from 'react-native-vision-camera';
-import {QRCodeScanner} from '../../components/QRCodeScanner';
-import {NoCameraDeviceErrorScreen} from '../CameraScreen/NoCameraScreen';
-import {NoPermissionsScreen} from '../CameraScreen/PermissonScreen';
-import {FlashLightIcon} from '../../assets/icons/TabIcons/FlashlightIcon';
-import {CameraRotateIcon} from '../../assets/icons/TabIcons/CameraRotateIcon';
-import {rem} from '../../theme/rn-units';
-import useCameraPermissions from '../../hooks/useCameraPermissions';
+import {QRCodeScanner} from '@components/QRCodeScanner';
+import {NoCameraDeviceErrorScreen} from '@screens/CameraScreen/NoCameraScreen';
+import {NoPermissionsScreen} from '@screens/CameraScreen/PermissonScreen';
+import {FlashLightIcon} from '@assets/icons/TabIcons/FlashlightIcon';
+import {CameraRotateIcon} from '@assets/icons/TabIcons/CameraRotateIcon';
+import {rem} from '@theme/rn-units';
+import useCameraPermissions from '@hooks/useCameraPermissions';
 
 export const ScanScreen = () => {
   const {isDarkMode} = useThemeMode();

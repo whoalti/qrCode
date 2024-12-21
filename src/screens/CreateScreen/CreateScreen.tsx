@@ -5,13 +5,15 @@ import {
   Text,
   TextInput,
   useColorScheme,
+  TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import QRCode from 'react-native-qrcode-svg';
 import {useStyles} from './styles';
-import {useDebounce} from '../../hooks/useDebounce';
-import {rem} from '../../theme/rn-units';
-import {useTheme} from '../../theme/useTheme';
+import {useDebounce} from '@hooks/useDebounce';
+import {rem} from '@theme/rn-units';
+import {useTheme} from '@theme/useTheme';
+import {ShareIcon} from '@assets/icons/ShareIcon';
+// import ViewShot from 'react-native-view-shot';
 
 export const CreateScreen = () => {
   const [input, setInput] = useState('');
@@ -24,11 +26,11 @@ export const CreateScreen = () => {
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.text}>
-          Create your QR code here{' '}
-          <Icon
-            name="qrcode"
-            size={20}
-            color={isDarkMode ? Colors.text.dark : Colors.text.primary}
+          Create and share your QR code here{' '}
+          <ShareIcon
+            width={rem(14)}
+            height={rem(14)}
+            fill={styles.text.color}
           />
         </Text>
 
@@ -47,6 +49,16 @@ export const CreateScreen = () => {
             isDarkMode ? Colors.text.placeholder : Colors.text.secondary
           }
         />
+        <TouchableOpacity>
+          <Text style={styles.shareTouchOpacity}>
+            Share your qr code{' '}
+            <ShareIcon
+              width={rem(14)}
+              height={rem(14)}
+              fill={styles.text.color}
+            />
+          </Text>
+        </TouchableOpacity>
         {/* move to another component*/}
       </View>
     </SafeAreaView>
